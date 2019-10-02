@@ -266,11 +266,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickNext(View view){
         Intent intent=new Intent(MainActivity.this, SecondActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
     }
 
     public void onClickBack(View view){
-        finish();
+        super.onDestroy();
     }
 }
 
@@ -293,11 +294,13 @@ public class SecondActivity extends Activity {
 
     public void onClickNext(View view){
         Intent intent=new Intent(SecondActivity.this, ThirdActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
     }
 
     public void onClickBack(View view){
         Intent intent=new Intent(SecondActivity.this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
     }
 }
@@ -321,6 +324,7 @@ public class ThirdActivity extends Activity {
 
     public void onClickBack(View view){
         Intent intent=new Intent(ThirdActivity.this, SecondActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
     }
 }
