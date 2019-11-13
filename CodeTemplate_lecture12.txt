@@ -1,0 +1,178 @@
+################################################
+#### ImageView Example activity_main.xml
+################################################
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/simpleImageView"
+        android:layout_width="fill_parent"
+        android:layout_height="200dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/lion" />
+
+</LinearLayout>
+
+
+################################################
+#### ImageView Example MainActivity.java
+################################################
+package com.example.testimageview;
+
+import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
+import android.widget.Toast;
+import android.view.View;
+import android.widget.ImageView;
+
+public class MainActivity extends AppCompatActivity {
+
+    String imageLabel = "lion";
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.test_activity);
+
+        final ImageView simpleImageView = (ImageView) findViewById(R.id.simpleImageView);
+        simpleImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (imageLabel == "lion") {
+                    simpleImageView.setImageResource(R.drawable.monkey);
+                    imageLabel = "monkey";
+                } else {
+                    simpleImageView.setImageResource(R.drawable.lion);
+                    imageLabel = "lion";
+                }
+            }
+        });
+    }
+}
+
+################################################
+#### Switch Example activity_main.xml
+################################################
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Switch
+        android:id="@+id/simpleSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:layout_gravity="center_horizontal"
+        android:text="Lion" /><!-- text to be displayed whenever current state is checked-->
+
+</LinearLayout>
+
+################################################
+#### Switch Example MainActivity.java
+################################################
+package com.example.testswitch;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+
+import android.widget.Switch;
+import android.widget.CompoundButton;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // initiate a Switch
+        final Switch simpleSwitch = (Switch) findViewById(R.id.simpleSwitch);
+
+        //set the current state of a Switch
+        simpleSwitch.setChecked(true);
+
+        simpleSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // do something, the isChecked will be
+                // true if the switch is in the On position
+                if ( simpleSwitch.isChecked() ) {
+                    simpleSwitch.setText("Lion");
+                } else {
+                    simpleSwitch.setText("Monkey");
+                }
+            }
+        });
+    }
+}
+
+################################################
+#### RatingStar Example activity_main.xml
+################################################
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RatingBar
+        android:id="@+id/simpleRatingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="60dp"
+        android:background="#0f0"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:rating="2" />
+
+    <Button
+        android:id="@+id/submitButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="#f00"
+        android:padding="10dp"
+        android:text="Submit"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+</LinearLayout>
+
+################################################
+#### RatingStar Example MainActivity.java
+################################################
+package com.example.testratingbar;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+
+import android.widget.RatingBar;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        // initiate rating bar and a button
+        final RatingBar simpleRatingBar = (RatingBar) findViewById(R.id.simpleRatingBar);
+        Button submitButton = (Button) findViewById(R.id.submitButton);
+        // perform click event on button
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // get values and then displayed in a toast
+                String totalStars = "Total Stars:: " + simpleRatingBar.getNumStars();
+                String rating = "Rating :: " + simpleRatingBar.getRating();
+                Toast.makeText(getApplicationContext(), totalStars + "\n" + rating, Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+}
